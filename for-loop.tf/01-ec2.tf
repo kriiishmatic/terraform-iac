@@ -1,10 +1,12 @@
 resource "aws_instance" "Typo"{
-    count = 4
+    # for_each = var.environment
+    for_each = toset(var.environment)
     ami = var.ami_id
-    instance_type = var.environment == "dev" ? "t3.micro" : "t3.large"
+    instance_type = "t3.micro"
     vpc_security_group_ids = [aws_security_group.inbound.id]
      tags = {
-        Name = var.instance[count.index]
+        # Name = each.key
+        Name = each.value
         Terraform = "true"
      }
 
@@ -12,7 +14,6 @@ resource "aws_instance" "Typo"{
 
 resource "aws_security_group" "inbound"{
   name        = var.sg_name
-
   # Ingress: from_port = 0, to_port = 0, protocol = "-1" -> all protocols / all ports
   ingress {
     description      = "Allow all inbound traffic"

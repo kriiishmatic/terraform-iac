@@ -6,10 +6,10 @@ variable "ami_id" {
 #   type = string
 #   default = "t3.micro"
 # }
-variable "instance" {
-  type = list(string)
-  default = ["mysql","redis","rabbitmq","mongo"]
-  }
+# variable "instance" {
+#   type = list(string)
+#   default = ["mysql","redis"]#,"rabbitmq","mongo"]
+#   }
 
 variable "aws_region" {
   type = string
@@ -67,10 +67,15 @@ variable "sg_tags" {
   }
 }
 variable "environment" {
-  type    = string
-  default = "dev"
-  
-}
+  default = ["mongodb","mysql"]
+  # type    = map(string)
+  # default = {
+  #   mongodb = "t3.micro"
+  #    mysql   = "t3.small"
+  #   redis   = "t3.micro"
+  }
+# }
+
 variable "zone_id" {
   type = string
   default = "Z0212707MY585LOOEFGA"
