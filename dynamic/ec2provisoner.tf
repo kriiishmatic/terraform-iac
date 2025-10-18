@@ -7,11 +7,11 @@ resource "aws_instance" "terraform" {
         Terraform = "true"
     }
     provisioner "local-exec" {
-      command = " echo Redirecting Private IP ${self.private_ip} > inventory "
+      command = " echo  ${self.private_ip} > inventory "
     }
 
     provisioner "local-exec" {
-      command = " echo Instance with Private IP ${self.private_ip} is getting destroyed"
+      command = " echo ${self.private_ip} is getting destroyed"
         when    = destroy
     }
 
