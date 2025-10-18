@@ -1,15 +1,15 @@
 resource "aws_instance" "Typo"{
-    # for_each = var.environment
-    for_each = toset(var.environment)
+    for_each = var.environment
+    # for_each = toset(var.environment)
     ami = var.ami_id
-    instance_type = "t3.micro"
+    instance_type = each.value
+    depends_on = [aws_security_group.inbound]
     vpc_security_group_ids = [aws_security_group.inbound.id]
      tags = {
         # Name = each.key
-        Name = each.value
+        Name = each.key
         Terraform = "true"
-     }
-
+     }      
 }
 
 resource "aws_security_group" "inbound"{

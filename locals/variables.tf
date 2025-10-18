@@ -66,15 +66,15 @@ variable "sg_tags" {
     Name = "inbound"
   }
 }
-variable "environment" {
-  # default = ["mongodb","mysql"]
-  type    = map(string)
-  default = {
-    mongodb = "t3.micro"
-     mysql   = "t3.small"
-    redis   = "t3.micro"
-  }
-}
+# variable "environment" {
+#   # default = ["mongodb","mysql"]
+#   type    = map(string)
+#   default = {
+#     mongodb = "t3.micro"
+#      mysql   = "t3.small"
+#     redis   = "t3.micro"
+#   }
+# }
 
 variable "zone_id" {
   type = string
@@ -84,4 +84,23 @@ variable "zone_id" {
 variable "domain_name" {
   type = string
   default = "kriiishmatic.com"
+}
+
+variable "project"{
+  type = string
+  default = "Roboshop"
+}
+
+variable "environment" {
+  type = string
+  default = "dev" 
+}
+
+variable "common_tags" {
+  type = map(string)
+  default = {
+    terraform = true
+    environment = "dev"
+    project = "roboshop"
+  }
 }
